@@ -1,0 +1,43 @@
+# Binaries och artefakter
+bin/
+obj/
+out/
+
+# Bygg- och konfigurationsfiler
+**/*.suo
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+
+# Verktyg
+/.vs
+/.vscode/
+*.nupkg
+*.snupkg
+/project.lock.json
+/project.fragment.lock.json
+/artifacts/
+
+# Paket
+**/packages/*
+!**/packages/build/
+package-lock.json
+project.assets.json
+*.pfx
+*.cert
+*.key
+*.snk
+*.ps1
+
+# Databaser
+*.mdf
+*.ldf
+*.ndf
+
+# Loggfiler och tempfiler
+*.log
+*.tmp
+*.temp
+*.cache
+/tmp/
+/temp/
