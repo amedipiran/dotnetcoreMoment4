@@ -25,5 +25,28 @@ namespace SongListApi.Controllers
             return await _context.Categories.ToListAsync();
         }
 
+[HttpPost]
+public async Task<ActionResult<Category>> PostCategory(Category category)
+{
+    _context.Categories.Add(category);
+    await _context.SaveChangesAsync();
+
+    return CreatedAtAction(nameof(GetCategory), new { id = category.Id }, category);
+}
+
+// GET by ID för att användas av CreatedAtAction
+[HttpGet("{id}")]
+public async Task<ActionResult<Category>> GetCategory(int id)
+{
+    var category = await _context.Categories.FindAsync(id);
+
+    if (category == null)
+    {
+        return NotFound();
+    }
+
+    return category;
+}
+
     }
 }
