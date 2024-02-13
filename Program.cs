@@ -1,11 +1,15 @@
 using Microsoft.EntityFrameworkCore;
-using SongListApi.Data; // Anpassa detta till ditt projekt
-using SongListApi.Models; // Anpassa detta till ditt projekt
+using Microsoft.AspNetCore.Mvc;
+using SongListApi.Data;
+using SongListApi.Models;
+using System.Linq;
+using System.Text.Json.Serialization; // För att använda ReferenceHandler
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Lägg till tjänster i containern.
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+    x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve); // Hantera cykliska referenser
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -59,14 +63,14 @@ void SeedDatabase(WebApplication app)
                     Artist = "Metallica",
                     Title = "Master of Puppets",
                     Length = 515,
-                    Category = metalCategory
+                    CategoryId = metalCategory.Id 
                 },
                 new Song
                 {
                     Artist = "Led Zeppelin",
                     Title = "Stairway to Heaven",
                     Length = 482,
-                    Category = rockCategory
+                    CategoryId = rockCategory.Id 
                 }
             );
             dbContext.SaveChanges();
