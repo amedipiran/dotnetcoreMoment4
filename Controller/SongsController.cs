@@ -64,5 +64,44 @@ public async Task<IActionResult> DeleteSong(int id)
     return Ok(new { message = "Låten har tagits bort." });
 }
 
+//PUT
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateSong(int id, Song updatedSong)
+{
+    if (id != updatedSong.Id)
+    {
+        return BadRequest(new { message = "Låtens ID stämmer inte överens." });
+    }
+
+    var song = await _context.Songs.FindAsync(id);
+    if (song == null)
+    {
+        return NotFound(new { message = "Låten hittades inte." });
+    }
+
+    song.Artist = updatedSong.Artist;
+    song.Title = updatedSong.Title;
+    song.Length = updatedSong.Length;
+    song.CategoryId = updatedSong.CategoryId;
+
+    try
+    {
+        await _context.SaveChangesAsync();
+        return Ok(new { message = "Låten har uppdaterats." });
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (!_context.Songs.Any(e => e.Id == id))
+        {
+            return NotFound(new { message = "Låten hittades inte vid uppdatering." });
+        }
+        else
+        {
+            throw;
+        }
+    }
+}
+
+
     }
 }

@@ -28,6 +28,20 @@ POST http://localhost:5030/api/songs
 Tar bort en specifik låt med angivet id. 
 DELETE http://localhost:5030/api/songs/{id}
 
+### PUT för att ändra låt
+PUT http://localhost:5030/api/songs/{id}
+**Exempel på JSON för att ändra en låt:**
+```json
+{
+  "id": 6,
+  "artist": "Pink Floyd",
+  "title": "Comfortably Numb (Live Version)",
+  "length": 500,
+  "categoryId": 1
+}
+
+ ```
+
 ## Kategorier
 
 ### GET Alla Kategorier
@@ -51,3 +65,14 @@ POST http://localhost:5030/api/categories
 ### DELETE Ta bort låt
 Tar bort en specifik kategori med angivet id. 
 DELETE http://localhost:5030/api/categories/{id}
+
+### PUT för att ändra Kategori
+PUT http://localhost:5030/api/categories/{id}
+**Exempel på JSON för att ändra en Kategori:**
+```json
+{
+    "id": 4,
+    "name" : "Testing"
+}
+
+ ```

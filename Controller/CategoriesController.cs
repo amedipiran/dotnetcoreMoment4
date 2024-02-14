@@ -68,6 +68,41 @@ public async Task<IActionResult> DeleteCategory(int id)
     return Ok(new { message = "Kategorin har tagits bort." });
 }
 
+//PUT
+[HttpPut("{id}")]
+public async Task<IActionResult> UpdateCategory(int id, Category updatedCategory)
+{
+    if (id != updatedCategory.Id)
+    {
+        return BadRequest(new { message = "Kategori-ID stämmer inte överens." });
+    }
+
+    var category = await _context.Categories.FindAsync(id);
+    if (category == null)
+    {
+        return NotFound(new { message = "Kategorin hittades inte." });
+    }
+
+    category.Name = updatedCategory.Name;
+
+    try
+    {
+        await _context.SaveChangesAsync();
+        return Ok(new { message = "Kategorin har uppdaterats." });
+    }
+    catch (DbUpdateConcurrencyException)
+    {
+        if (!_context.Categories.Any(e => e.Id == id))
+        {
+            return NotFound(new { message = "Kategorin hittades inte vid uppdatering." });
+        }
+        else
+        {
+            throw;
+        }
+    }
+}
+
 
     }
 }
