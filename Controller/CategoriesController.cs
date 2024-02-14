@@ -48,5 +48,26 @@ public async Task<ActionResult<Category>> GetCategory(int id)
     return category;
 }
 
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteCategory(int id)
+{
+    var category = await _context.Categories.Include(c => c.Songs).FirstOrDefaultAsync(c => c.Id == id);
+    if (category == null)
+    {
+        return NotFound();
+    }
+
+    if (category.Songs.Any())
+    {
+        // Returnera ett felmeddelande om det finns låtar som tillhör kategorin
+        return BadRequest("Kategorin kan inte tas bort eftersom den har tillhörande låtar.");
+    }
+
+    _context.Categories.Remove(category);
+    await _context.SaveChangesAsync();
+
+    return NoContent(); 
+}
+
     }
 }

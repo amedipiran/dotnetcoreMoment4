@@ -48,6 +48,21 @@ public async Task<ActionResult<Song>> GetSong(int id)
 
     return song;
 }
+//Delete
+[HttpDelete("{id}")]
+public async Task<IActionResult> DeleteSong(int id)
+{
+    var song = await _context.Songs.FindAsync(id);
+    if (song == null)
+    {
+        return NotFound(new { message = "Låten hittades inte." });
+    }
+
+    _context.Songs.Remove(song);
+    await _context.SaveChangesAsync();
+
+    return Ok(new { message = "Låten har tagits bort." });
+}
 
     }
 }
