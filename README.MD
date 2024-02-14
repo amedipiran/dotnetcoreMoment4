@@ -1,6 +1,6 @@
 
 
-##Låtar
+#Låtar
 
 GET
 http://localhost:5030/api/songs
@@ -25,7 +25,7 @@ DELETE enstaka låt
 http://localhost:5030/api/songs/{id}
 
 
-Kategorier
+#Kategorier
 
 GET
 http://localhost:5030/api/categories
