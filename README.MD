@@ -1,45 +1,53 @@
+# DT191G - Moment 4 (API)
+**Av:** Roberto Piran Amedi (roam2200@student.miun.se), 2024.
 
+## Låtar
 
-#Låtar
+### GET Alla Låtar
+Hämtar en lista över alla låtar.
+GET http://localhost:5030/api/songs
 
-GET
-http://localhost:5030/api/songs
+### GET Enstaka Låt
+Hämtar en specifik låt med angivet ID.
+GET http://localhost:5030/api/songs/{id}
 
-GET enstaka låt
-http://localhost:5030/api/songs/{id}
-
-POST
-http://localhost:5030/api/songs
-
-Exempel på JSON vid POST för låt.
+### POST Lägg till Låt
+Lägger till en ny låt i databasen.
+POST http://localhost:5030/api/songs
+**Exempel på JSON för att lägga till en låt:**
+```json
 {
   "artist": "test",
   "title": "Test",
   "length": 145,
   "categoryId": 1
 }
+ ```
 
+### DELETE Ta bort låt
+Tar bort en specifik låt med angivet id. 
+DELETE http://localhost:5030/api/songs/{id}
 
+## Kategorier
 
-DELETE enstaka låt
-http://localhost:5030/api/songs/{id}
+### GET Alla Kategorier
+Hämtar en lista över alla Kategorier.
+GET http://localhost:5030/api/categories
 
+### GET Enstaka Kategori
+Hämtar en specifik kategori med angivet ID.
+GET http://localhost:5030/api/categories/{id}
 
-#Kategorier
-
-GET
-http://localhost:5030/api/categories
-
-GET enstaka kategori
-http://localhost:5030/api/categories/{id}
-
-POST
-http://localhost:5030/api/categories
-
-exempel på POST för kategori:
+### POST Lägg till kategori
+Lägger till en ny låt i databasen.
+POST http://localhost:5030/api/categories
+**Exempel på JSON för att lägga till en kategori:**
+```json
 {
-    "name" : "Rock"
+  "name": "test",
 }
+ ```
 
-DELETE
-http://localhost:5030/api/categories/{id}
+### DELETE Ta bort låt
+Tar bort en specifik kategori med angivet id. 
+DELETE http://localhost:5030/api/categories/{id}
